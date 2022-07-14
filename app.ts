@@ -1,17 +1,15 @@
-function add(n1: number, n2: number, showResult: boolean, phrase: string) {
-  const sum = n1 + n2;
+// const person: {
+//   name: string;
+//   age: number;
+// } = {
+//   name: 'Ronchi',
+//   age: 24,
+// };
 
-  if (showResult) {
-    console.log(phrase + sum);
-  } else {
-    return sum;
-  }
-}
+//better syntax
+const person = {
+  name: 'Ronchi',
+  age: 24,
+};
 
-let number1: number;
-number1 = 25;
-const number2 = 2.5;
-const printResult = true;
-let phrase = 'The sum is: ';
-// phrase = 5
-add(Number(number1), Number(number2), printResult, phrase);
+console.log(person.age);
