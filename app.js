@@ -25,3 +25,17 @@ function addAndHandle(n1, n2, cb) {
 addAndHandle(2, 5, function (result) {
     console.log('addAndHandle result :', result);
 });
+//TYPE unknown
+var userInput;
+var userName;
+userInput = 'RFM';
+// userName = userInput; //error, unknown types cannot be assigned to type strings; unlike type any
+//check it first
+if (typeof userInput === 'string') {
+    userName = userInput;
+}
+//TYPE never
+function createError(message, code) {
+    throw { message: message, code: code };
+}
+createError('Not Found!', 404);

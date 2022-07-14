@@ -45,3 +45,11 @@ userInput = 'RFM';
 if (typeof userInput === 'string') {
   userName = userInput;
 }
+
+//TYPE never
+function createError(message: string, code: number): never {
+  throw { message, code };
+}
+
+createError('Not Found!', 404); //does not return any result at all
+//const error = createError('message here', 500) //error no value
