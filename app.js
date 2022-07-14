@@ -1,19 +1,11 @@
-function combine(input1, input2, resultType //literal type + union type
-) {
-    var sum;
-    if (typeof input1 === 'number' && typeof input2 === 'number') {
-        sum = input1 + input2;
-    }
-    else {
-        sum = input1.toString() + input2.toString();
-    }
-    if (resultType === 'text') {
-        return sum.toString();
-    }
-    if (resultType === 'number') {
-        return Number(sum);
-    }
+// function add1(n1: number, n2: number): number {
+//   return n1 + n2;
+// }
+//let ts do its job regarding type inference
+function add(n1, n2) {
+    return n1 + n2;
 }
-var combineNumbers = combine(2, 5, 'text');
-var combineStrings = combine('Ronchi ', 'Floyd', 'text');
-console.log(combineNumbers, combineStrings);
+function printResult(result) {
+    console.log('Result is: ', result);
+}
+printResult(add(5, 25));
