@@ -1,7 +1,9 @@
+type StringOrNumber = string | number;
+type ResultType = 'text' | 'number'; //literal type + union type
 function combine(
-  input1: string | number,
-  input2: string | number,
-  resultType: 'text' | 'number' //literal type + union type
+  input1: StringOrNumber,
+  input2: StringOrNumber,
+  resultType: ResultType //literal type + union type
 ) {
   let sum;
   if (typeof input1 === 'number' && typeof input2 === 'number') {
