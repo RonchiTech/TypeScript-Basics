@@ -1,10 +1,16 @@
-function add(num1: number, num2: number) {
-  return num1 + num2;
+function add(n1: number, n2: number, showResult: boolean, phrase: string) {
+  const sum = n1 + n2;
+
+  if (showResult) {
+    console.log(phrase + sum);
+  } else {
+    return sum;
+  }
 }
 
 const number1 = 10;
 const number2 = 2.5;
+const printResult = true;
+const phrase = 'The sum is: ';
 
-const result = add(Number(number1), Number(number2));
-
-console.log(result);
+add(Number(number1), Number(number2), printResult, phrase);

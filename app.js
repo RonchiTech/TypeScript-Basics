@@ -1,7 +1,14 @@
-function add(num1, num2) {
-    return num1 + num2;
+function add(n1, n2, showResult, phrase) {
+    var sum = n1 + n2;
+    if (showResult) {
+        console.log(phrase + sum);
+    }
+    else {
+        return sum;
+    }
 }
-var number1 = '10';
+var number1 = 10;
 var number2 = 2.5;
-var result = add(Number(number1), Number(number2));
-console.log(result);
+var printResult = true;
+var phrase = 'The sum is: ';
+add(Number(number1), Number(number2), printResult, phrase);
