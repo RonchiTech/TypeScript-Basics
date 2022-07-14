@@ -10,9 +10,18 @@ function printResult(result) {
     console.log('Result is: ', result);
 }
 //Functions as Types
-var combineValues;
+// let combineValues: Function;
+var combineValues; //to be more stricter and clearer
 combineValues = add;
 // combineValues = 5; //error; not a func
-combineValues = printResult;
+// combineValues = printResult; //error because printResult func returns void
 console.log('hey', combineValues(12, 18));
 printResult(add(5, 25));
+//Function Types and Callbacks
+function addAndHandle(n1, n2, cb) {
+    var sum = n1 + n2;
+    cb(sum);
+}
+addAndHandle(2, 5, function (result) {
+    console.log('addAndHandle result :', result);
+});

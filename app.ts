@@ -23,3 +23,13 @@ combineValues = add;
 console.log('hey', combineValues(12, 18));
 
 printResult(add(5, 25));
+
+//Function Types and Callbacks
+function addAndHandle(n1: number, n2: number, cb: (result: number) => void) {
+  const sum = n1 + n2;
+  cb(sum);
+}
+
+addAndHandle(2, 5, (result) => {
+  console.log('addAndHandle result :', result);
+});
