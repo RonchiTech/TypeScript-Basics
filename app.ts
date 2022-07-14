@@ -25,3 +25,32 @@ const combineNumbers = combine(2, 5, 'text');
 const combineStrings = combine('Ronchi ', 'Floyd', 'text');
 
 console.log(combineNumbers, combineStrings);
+
+// Type aliases can be used to "create" your own types. You're not limited to storing union types though - you can also provide an alias to a (possibly complex) object type.
+
+// For example:
+
+// type User1 = { name: string; age: number };
+// const u1: User1 = { name: 'Max', age: 30 }; // this works!
+// // This allows you to avoid unnecessary repetition and manage types centrally.
+
+// // For example, you can simplify this code:
+
+// function greet1(user: { name: string; age: number }) {
+//   console.log('Hi, I am ' + user.name);
+// }
+
+// function isOlder1(user: { name: string; age: number }, checkAge: number) {
+//   return checkAge > user.age;
+// }
+// // To:
+
+// type User2 = { name: string; age: number };
+
+// function greet2(user: User2) {
+//   console.log('Hi, I am ' + user.name);
+// }
+
+// function isOlder2(user: User2, checkAge: number) {
+//   return checkAge > user.age;
+// }
