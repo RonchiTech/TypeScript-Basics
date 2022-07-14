@@ -33,3 +33,15 @@ function addAndHandle(n1: number, n2: number, cb: (result: number) => void) {
 addAndHandle(2, 5, (result) => {
   console.log('addAndHandle result :', result);
 });
+
+//TYPE unknown
+let userInput: unknown;
+let userName: string;
+
+userInput = 'RFM';
+// userName = userInput; //error, unknown types cannot be assigned to type strings; unlike type any
+
+//check it first
+if (typeof userInput === 'string') {
+  userName = userInput;
+}
