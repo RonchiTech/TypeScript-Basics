@@ -7,8 +7,19 @@ function add(n1: number, n2: number) {
   return n1 + n2;
 }
 
-function printResult(result: number) { //function return type void
+function printResult(result: number) {
+  //function return type void
   console.log('Result is: ', result);
 }
+
+//Functions as Types
+// let combineValues: Function;
+let combineValues: (param1: number, param2: number) => number; //to be more stricter and clearer
+
+combineValues = add;
+// combineValues = 5; //error; not a func
+// combineValues = printResult; //error because printResult func returns void
+
+console.log('hey', combineValues(12, 18));
 
 printResult(add(5, 25));
