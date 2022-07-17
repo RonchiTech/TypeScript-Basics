@@ -21,3 +21,10 @@ const printRest = (...restParams: string[] | number[]) => {
 };
 
 printRest('my', 'name', 'is', 'RFM');
+
+const addRest = (...restParams: number[]) => {
+  return restParams.reduce((prevValue, currValue) => {
+    return prevValue + currValue;
+  }, 0);
+};
+console.info(addRest(2, 5, 7, 15, 9.8));

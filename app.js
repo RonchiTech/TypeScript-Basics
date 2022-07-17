@@ -16,3 +16,9 @@ const printRest = (...restParams) => {
     console.log(restParams);
 };
 printRest('my', 'name', 'is', 'RFM');
+const addRest = (...restParams) => {
+    return restParams.reduce((prevValue, currValue) => {
+        return prevValue + currValue;
+    }, 0);
+};
+console.info(addRest(2, 5, 7, 15, 9.8));
