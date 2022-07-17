@@ -22,3 +22,10 @@ const addRest = (...restParams) => {
     }, 0);
 };
 console.info(addRest(2, 5, 7, 15, 9.8));
+const multiply = (...twoNumbers) => {
+    return twoNumbers.reduce((prev, curr) => {
+        return prev * curr;
+    }, 1);
+};
+// multiply(2, 5, 8); //not allowed, expected only 2 arguments (based on the tuple)
+multiply(2, 5);
