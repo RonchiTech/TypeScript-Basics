@@ -1,9 +1,9 @@
 "use strict";
 class Department {
-    constructor(n) {
-        this.name = 'NO_DEPARTMENT_NAME';
+    constructor(name) {
+        this.name = name;
+        // private name: string = 'NO_DEPARTMENT_NAME';
         this.employees = [];
-        this.name = n;
     }
     describe() {
         console.log(`This is the ${this.name}`);
@@ -31,5 +31,6 @@ class Department {
 // accountingCopy2.describe();
 const accounting = new Department('Accounting');
 accounting.add('Ronchi');
+accounting.describe();
 // accounting.employees[1] = 'Floyd' //cannot do this once the property/field is set to private
 accounting.showInfo();

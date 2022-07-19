@@ -1,10 +1,8 @@
 class Department {
-  name: string = 'NO_DEPARTMENT_NAME';
+  // private name: string = 'NO_DEPARTMENT_NAME';
   private employees: string[] = [];
 
-  constructor(n: string) {
-    this.name = n;
-  }
+  constructor(private name: string) {}
 
   describe(this: Department) {
     console.log(`This is the ${this.name}`);
@@ -17,9 +15,8 @@ class Department {
     return this.employees;
   }
 
-  showInfo(){
+  showInfo() {
     console.log(this.returnEmployees());
-    
   }
 }
 
@@ -41,5 +38,6 @@ class Department {
 const accounting = new Department('Accounting');
 
 accounting.add('Ronchi');
+accounting.describe();
 // accounting.employees[1] = 'Floyd' //cannot do this once the property/field is set to private
-accounting.showInfo()
+accounting.showInfo();
