@@ -12,12 +12,12 @@ class Department {
     this.employees.push(employee);
   }
 
-  private returnEmployees() {
+  get returnEmployees() {
     return this.employees;
   }
 
   showInfo() {
-    console.log(this.returnEmployees());
+    console.log(this.returnEmployees);
   }
 }
 
@@ -64,14 +64,17 @@ ITDepartment.describe();
 console.log(ITDepartment);
 
 class Finance extends Department {
+  private newlyHired: string;
   constructor(id: string, employees: string[], private reports: string[] = []) {
     super(id, 'Finance');
     this.employees = employees;
+    this.newlyHired = employees[employees.length - 1];
   }
 
   addReport(report: string) {
     this.reports.push(report);
   }
+
   printReports() {
     console.log(this.reports);
   }
@@ -82,9 +85,23 @@ class Finance extends Department {
       return;
     }
     this.employees.push(employee);
+    this.newlyHired = this.employees[this.employees.length - 1];
   }
+
   updateName(name: string) {
     this.name = name;
+  }
+
+  get latestEmployee() {
+    if (this.employees) {
+      return this.newlyHired;
+    }
+    throw new Error('No employees found!');
+  }
+
+  set latestEmployee(employee: string) {
+    // this.newlyHired = employee; OR
+    this.addEmployee(employee);
   }
   // updateName(newName: string) {
   //   this.name = newName;
@@ -102,5 +119,10 @@ finance.addReport('Paid petty cash');
 finance.printReports();
 finance.updateName('Finance Department');
 console.log(finance);
+console.info('GET', finance);
+finance.latestEmployee = 'Lee';
+console.log('NEW', finance.latestEmployee);
+finance.latestEmployee = 'Gladyss';
+finance.showInfo();
 // finance.name = 'New Name';
 // console.log(finance);

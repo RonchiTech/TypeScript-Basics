@@ -12,11 +12,11 @@ class Department {
     addEmployee(employee) {
         this.employees.push(employee);
     }
-    returnEmployees() {
+    get returnEmployees() {
         return this.employees;
     }
     showInfo() {
-        console.log(this.returnEmployees());
+        console.log(this.returnEmployees);
     }
 }
 // const accounting = new Department('Accounting');
@@ -55,6 +55,7 @@ class Finance extends Department {
         super(id, 'Finance');
         this.reports = reports;
         this.employees = employees;
+        this.newlyHired = employees[employees.length - 1];
     }
     addReport(report) {
         this.reports.push(report);
@@ -68,9 +69,20 @@ class Finance extends Department {
             return;
         }
         this.employees.push(employee);
+        this.newlyHired = this.employees[this.employees.length - 1];
     }
     updateName(name) {
         this.name = name;
+    }
+    get latestEmployee() {
+        if (this.employees) {
+            return this.newlyHired;
+        }
+        throw new Error('No employees found!');
+    }
+    set latestEmployee(employee) {
+        // this.newlyHired = employee; OR
+        this.addEmployee(employee);
     }
 }
 const finance = new Finance('FI103', ['Nikka']);
@@ -84,5 +96,10 @@ finance.addReport('Paid petty cash');
 finance.printReports();
 finance.updateName('Finance Department');
 console.log(finance);
+console.info('GET', finance);
+finance.latestEmployee = 'Lee';
+console.log('NEW', finance.latestEmployee);
+finance.latestEmployee = 'Gladyss';
+finance.showInfo();
 // finance.name = 'New Name';
 // console.log(finance);
