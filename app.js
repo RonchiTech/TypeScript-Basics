@@ -67,3 +67,5 @@ finance.addEmployee('Nikka');
 finance.addReport('Paid petty cash');
 finance.printReports();
 console.log(finance);
+// finance.name = 'New Name';
+console.log(finance);

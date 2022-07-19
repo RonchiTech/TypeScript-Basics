@@ -74,10 +74,15 @@ class Finance extends Department {
   printReports() {
     console.log(this.reports);
   }
+  // updateName(newName: string) {
+  //   this.name = newName;
+  // }
 }
 
 const finance = new Finance('FI103');
 finance.addEmployee('Nikka');
 finance.addReport('Paid petty cash');
 finance.printReports();
+console.log(finance);
+// finance.name = 'New Name';
 console.log(finance);
