@@ -2,15 +2,16 @@ class Department {
   // private name: string = 'NO_DEPARTMENT_NAME';
   private employees: string[] = [];
 
-  constructor(private name: string) {}
+  constructor(private readonly id: string, private name: string) {}
 
   describe(this: Department) {
-    console.log(`This is the ${this.name}`);
+    console.log(`This is the ${this.name}. ID:${this.id}`);
   }
 
-  add(employee: string) {
+  addEmployee(employee: string) {
     this.employees.push(employee);
   }
+
   private returnEmployees() {
     return this.employees;
   }
@@ -35,9 +36,48 @@ class Department {
 
 // accountingCopy2.describe();
 
-const accounting = new Department('Accounting');
+const accounting = new Department('acc1', 'Accounting');
 
-accounting.add('Ronchi');
-accounting.describe();
+accounting.addEmployee('Ronchi');
+// accounting.describe();
 // accounting.employees[1] = 'Floyd' //cannot do this once the property/field is set to private
-accounting.showInfo();
+// accounting.showInfo();
+console.log(accounting);
+
+class IT extends Department {
+  private admins: string[];
+
+  constructor(id: string, admins: string[] = []) {
+    super(id, 'Information Technology');
+    this.admins = admins;
+  }
+
+  addAdmin(name: string) {
+    this.admins.push(name);
+  }
+}
+
+const ITDepartment = new IT('IT101');
+ITDepartment.addAdmin('Floyd');
+ITDepartment.addEmployee('Floyd');
+ITDepartment.describe();
+console.log(ITDepartment);
+
+class Finance extends Department {
+  constructor(id: string, private reports: string[] = []) {
+    super(id, 'Finance');
+  }
+
+  addReport(report: string) {
+    this.reports.push(report);
+  }
+  printReports() {
+    console.log(this.reports);
+  }
+}
+
+const finance = new Finance('FI103');
+finance.addEmployee('Nikka');
+finance.addReport('Paid petty cash');
+finance.printReports();
+console.log(finance);
