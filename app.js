@@ -1,12 +1,23 @@
 "use strict";
-var Department = /** @class */ (function () {
-    function Department(n) {
+class Department {
+    constructor(n) {
+        this.name = 'NO_DEPARTMENT_NAME';
+        this.description = '';
         this.name = n;
     }
-    Department.prototype.addMembers = function () {
+    addMembers() {
         return;
-    };
-    return Department;
-}());
-var accounting = new Department('Accounting');
-console.log(accounting);
+    }
+    addDescription(d) {
+        this.description = d;
+    }
+    describe() {
+        console.log(`The ${this.name} Department  is for: ${this.description}`);
+    }
+}
+const accounting = new Department('Accounting');
+accounting.addDescription("Accountants' department");
+accounting.describe();
+const accountingCopy = { describe: accounting.describe };
+// console.log(accounting);
+accountingCopy.describe.bind(accounting);
