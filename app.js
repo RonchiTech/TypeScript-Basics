@@ -51,9 +51,10 @@ ITDepartment.addEmployee('Floyd');
 ITDepartment.describe();
 console.log(ITDepartment);
 class Finance extends Department {
-    constructor(id, reports = []) {
+    constructor(id, employees, reports = []) {
         super(id, 'Finance');
         this.reports = reports;
+        this.employees = employees;
     }
     addReport(report) {
         this.reports.push(report);
@@ -61,11 +62,27 @@ class Finance extends Department {
     printReports() {
         console.log(this.reports);
     }
+    addEmployee(employee) {
+        if (this.employees.includes(employee)) {
+            console.log(`${employee} is already an employee`);
+            return;
+        }
+        this.employees.push(employee);
+    }
+    updateName(name) {
+        this.name = name;
+    }
 }
-const finance = new Finance('FI103');
+const finance = new Finance('FI103', ['Nikka']);
 finance.addEmployee('Nikka');
+finance.addEmployee('Trammz');
+finance.addEmployee('Nikka');
+finance.addEmployee('Trammz');
+finance.addEmployee('Greta');
+finance.addEmployee('Chuchi');
 finance.addReport('Paid petty cash');
 finance.printReports();
+finance.updateName('Finance Department');
 console.log(finance);
 // finance.name = 'New Name';
-console.log(finance);
+// console.log(finance);

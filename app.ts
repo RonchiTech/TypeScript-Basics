@@ -1,8 +1,8 @@
 class Department {
   // private name: string = 'NO_DEPARTMENT_NAME';
-  private employees: string[] = [];
+  protected employees: string[] = [];
 
-  constructor(private readonly id: string, private name: string) {}
+  constructor(private readonly id: string, protected name: string) {}
 
   describe(this: Department) {
     console.log(`This is the ${this.name}. ID:${this.id}`);
@@ -64,8 +64,9 @@ ITDepartment.describe();
 console.log(ITDepartment);
 
 class Finance extends Department {
-  constructor(id: string, private reports: string[] = []) {
+  constructor(id: string, employees: string[], private reports: string[] = []) {
     super(id, 'Finance');
+    this.employees = employees;
   }
 
   addReport(report: string) {
@@ -74,15 +75,32 @@ class Finance extends Department {
   printReports() {
     console.log(this.reports);
   }
+
+  addEmployee(employee: string): void {
+    if (this.employees.includes(employee)) {
+      console.log(`${employee} is already an employee`);
+      return;
+    }
+    this.employees.push(employee);
+  }
+  updateName(name: string) {
+    this.name = name;
+  }
   // updateName(newName: string) {
   //   this.name = newName;
   // }
 }
 
-const finance = new Finance('FI103');
+const finance = new Finance('FI103', ['Nikka']);
 finance.addEmployee('Nikka');
+finance.addEmployee('Trammz');
+finance.addEmployee('Nikka');
+finance.addEmployee('Trammz');
+finance.addEmployee('Greta');
+finance.addEmployee('Chuchi');
 finance.addReport('Paid petty cash');
 finance.printReports();
+finance.updateName('Finance Department');
 console.log(finance);
 // finance.name = 'New Name';
-console.log(finance);
+// console.log(finance);
