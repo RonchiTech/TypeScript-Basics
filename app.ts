@@ -1,12 +1,14 @@
-class Department {
+abstract class Department {
   // private name: string = 'NO_DEPARTMENT_NAME';
   protected employees: string[] = [];
   static fiscalYear: string = '2022';
   constructor(private readonly id: string, protected name: string) {}
 
-  describe(this: Department) {
-    console.log(`This is the ${this.name}. ID:${this.id}`);
-  }
+  // describe(this: Department) {
+  //   console.log(`This is the ${this.name}. ID:${this.id}`);
+  // }
+
+  abstract describe(this: Department): void;
 
   addEmployee(employee: string) {
     this.employees.push(employee);
@@ -41,13 +43,14 @@ class Department {
 console.log('FiscalYear', Department.fiscalYear);
 console.log('FiscalYear', Department.greetings('Hello World!'));
 
-const accounting = new Department('acc1', 'Accounting');
+// Cannot create an instance of an abstract class
+// const accounting = new Department('acc1', 'Accounting');
 
-accounting.addEmployee('Ronchi');
+// accounting.addEmployee('Ronchi');
 // accounting.describe();
 // accounting.employees[1] = 'Floyd' //cannot do this once the property/field is set to private
 // accounting.showInfo();
-console.log(accounting);
+// console.log(accounting);
 
 class IT extends Department {
   private admins: string[];
@@ -55,6 +58,10 @@ class IT extends Department {
   constructor(id: string, admins: string[] = []) {
     super(id, 'Information Technology');
     this.admins = admins;
+  }
+
+  describe(message: string = '') {
+    console.log(`IT Department describe style ${message}`);
   }
 
   addAdmin(name: string) {
@@ -65,7 +72,7 @@ console.log(IT.greetings("I'm from IT"));
 const ITDepartment = new IT('IT101');
 ITDepartment.addAdmin('Floyd');
 ITDepartment.addEmployee('Floyd');
-ITDepartment.describe();
+ITDepartment.describe('HEY HEY HEY');
 console.log(ITDepartment);
 
 class Finance extends Department {
@@ -75,7 +82,9 @@ class Finance extends Department {
     this.employees = employees;
     this.newlyHired = employees[employees.length - 1];
   }
-
+  describe(message: string = ''): void {
+    console.log(`Finance Describing: ${message}`);
+  }
   addReport(report: string) {
     this.reports.push(report);
   }
@@ -114,6 +123,7 @@ class Finance extends Department {
 }
 
 const finance = new Finance('FI103', ['Nikka']);
+finance.describe('Fi Fi N');
 finance.addEmployee('Nikka');
 finance.addEmployee('Trammz');
 finance.addEmployee('Nikka');

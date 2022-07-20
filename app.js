@@ -6,9 +6,6 @@ class Department {
         // private name: string = 'NO_DEPARTMENT_NAME';
         this.employees = [];
     }
-    describe() {
-        console.log(`This is the ${this.name}. ID:${this.id}`);
-    }
     addEmployee(employee) {
         this.employees.push(employee);
     }
@@ -36,16 +33,20 @@ Department.fiscalYear = '2022';
 // accountingCopy2.describe();
 console.log('FiscalYear', Department.fiscalYear);
 console.log('FiscalYear', Department.greetings('Hello World!'));
-const accounting = new Department('acc1', 'Accounting');
-accounting.addEmployee('Ronchi');
+// Cannot create an instance of an abstract class
+// const accounting = new Department('acc1', 'Accounting');
+// accounting.addEmployee('Ronchi');
 // accounting.describe();
 // accounting.employees[1] = 'Floyd' //cannot do this once the property/field is set to private
 // accounting.showInfo();
-console.log(accounting);
+// console.log(accounting);
 class IT extends Department {
     constructor(id, admins = []) {
         super(id, 'Information Technology');
         this.admins = admins;
+    }
+    describe(message = '') {
+        console.log(`IT Department describe style ${message}`);
     }
     addAdmin(name) {
         this.admins.push(name);
@@ -55,7 +56,7 @@ console.log(IT.greetings("I'm from IT"));
 const ITDepartment = new IT('IT101');
 ITDepartment.addAdmin('Floyd');
 ITDepartment.addEmployee('Floyd');
-ITDepartment.describe();
+ITDepartment.describe('HEY HEY HEY');
 console.log(ITDepartment);
 class Finance extends Department {
     constructor(id, employees, reports = []) {
@@ -63,6 +64,9 @@ class Finance extends Department {
         this.reports = reports;
         this.employees = employees;
         this.newlyHired = employees[employees.length - 1];
+    }
+    describe(message = '') {
+        console.log(`Finance Describing: ${message}`);
     }
     addReport(report) {
         this.reports.push(report);
@@ -93,6 +97,7 @@ class Finance extends Department {
     }
 }
 const finance = new Finance('FI103', ['Nikka']);
+finance.describe('Fi Fi N');
 finance.addEmployee('Nikka');
 finance.addEmployee('Trammz');
 finance.addEmployee('Nikka');
