@@ -1,7 +1,7 @@
 class Department {
   // private name: string = 'NO_DEPARTMENT_NAME';
   protected employees: string[] = [];
-
+  static fiscalYear: string = '2022';
   constructor(private readonly id: string, protected name: string) {}
 
   describe(this: Department) {
@@ -11,7 +11,9 @@ class Department {
   addEmployee(employee: string) {
     this.employees.push(employee);
   }
-
+  static greetings(greetings: string) {
+    return `${greetings}`;
+  }
   get returnEmployees() {
     return this.employees;
   }
@@ -36,6 +38,9 @@ class Department {
 
 // accountingCopy2.describe();
 
+console.log('FiscalYear', Department.fiscalYear);
+console.log('FiscalYear', Department.greetings('Hello World!'));
+
 const accounting = new Department('acc1', 'Accounting');
 
 accounting.addEmployee('Ronchi');
@@ -56,7 +61,7 @@ class IT extends Department {
     this.admins.push(name);
   }
 }
-
+console.log(IT.greetings("I'm from IT"));
 const ITDepartment = new IT('IT101');
 ITDepartment.addAdmin('Floyd');
 ITDepartment.addEmployee('Floyd');

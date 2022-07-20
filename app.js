@@ -12,6 +12,9 @@ class Department {
     addEmployee(employee) {
         this.employees.push(employee);
     }
+    static greetings(greetings) {
+        return `${greetings}`;
+    }
     get returnEmployees() {
         return this.employees;
     }
@@ -19,6 +22,7 @@ class Department {
         console.log(this.returnEmployees);
     }
 }
+Department.fiscalYear = '2022';
 // const accounting = new Department('Accounting');
 // accounting.describe();
 // const accountingCopy = { describe: accounting.describe };
@@ -30,6 +34,8 @@ class Department {
 //   describe: accounting.describe,
 // };
 // accountingCopy2.describe();
+console.log('FiscalYear', Department.fiscalYear);
+console.log('FiscalYear', Department.greetings('Hello World!'));
 const accounting = new Department('acc1', 'Accounting');
 accounting.addEmployee('Ronchi');
 // accounting.describe();
@@ -45,6 +51,7 @@ class IT extends Department {
         this.admins.push(name);
     }
 }
+console.log(IT.greetings("I'm from IT"));
 const ITDepartment = new IT('IT101');
 ITDepartment.addAdmin('Floyd');
 ITDepartment.addEmployee('Floyd');
