@@ -77,14 +77,29 @@ console.log(ITDepartment);
 
 class Finance extends Department {
   private newlyHired: string;
-  constructor(id: string, employees: string[], private reports: string[] = []) {
+  private static instance: Finance;
+
+  private constructor(
+    id: string,
+    employees: string[],
+    private reports: string[] = []
+  ) {
     super(id, 'Finance');
     this.employees = employees;
     this.newlyHired = employees[employees.length - 1];
   }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new Finance('Fin101');
+    }
+    return this.instance;
+  }
+
   describe(message: string = ''): void {
     console.log(`Finance Describing: ${message}`);
   }
+
   addReport(report: string) {
     this.reports.push(report);
   }
@@ -122,7 +137,8 @@ class Finance extends Department {
   // }
 }
 
-const finance = new Finance('FI103', ['Nikka']);
+// const finance = new Finance('FI103', ['Nikka']); //cannot instantiate if constructor was set to private. (Singletons)
+const finance = Finance.getInstance();
 finance.describe('Fi Fi N');
 finance.addEmployee('Nikka');
 finance.addEmployee('Trammz');
