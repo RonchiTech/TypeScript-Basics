@@ -72,3 +72,14 @@ function moveAnimal(animal) {
 let viceGanda;
 viceGanda = { runningSpeed: 100, type: 'horse' };
 moveAnimal(viceGanda);
+//4 Type Casting
+// const button = document.querySelector('button');
+// const paragraph = document.getElementById('main-paragraph');
+// const userInputElement = <HTMLInputElement>document.getElementById('user-input')!; // (!) tells TS it wont be null, type casting optional approach
+const userInputElement = document.getElementById('user-input');
+userInputElement.value = 'What is your name?';
+//if you are not sure if it exists then....
+const userInputElement2 = document.getElementById('user-input');
+if (userInputElement2) {
+    userInputElement2.value = 'Hello World!';
+}
