@@ -20,3 +20,11 @@ class Human {
 const human = new Human('Ronchi');
 human.greet('Happy Birthday');
 console.log(human.name);
+let add;
+add = (n1, n2) => {
+    return n1 + n2;
+};
+let add2;
+add2 = (num1, num2) => {
+    return num1 + num2;
+};

@@ -35,3 +35,22 @@ class Human implements Greetable {
 const human = new Human('Ronchi');
 human.greet('Happy Birthday');
 console.log(human.name);
+
+//
+type AddFnType = (n1: number, n2: number) => number;
+
+let add: AddFnType;
+
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
+
+//using interface as a function
+interface AddFnInt {
+  (num1: number, num2: number): number;
+}
+
+let add2: AddFnInt;
+add2 = (num1: number, num2: number) => {
+  return num1 + num2;
+};
