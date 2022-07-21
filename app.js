@@ -109,3 +109,9 @@ const myself = {
 };
 console.log(myself.name);
 console.log((_a = myself === null || myself === void 0 ? void 0 : myself.job) === null || _a === void 0 ? void 0 : _a.title);
+const zero = 0;
+const knull = null;
+const myname = 'Ronchi';
+console.log(myname !== null && myname !== void 0 ? myname : 'No Name');
+console.log(knull !== null && knull !== void 0 ? knull : 'No Name');
+console.log(zero !== null && zero !== void 0 ? zero : 'No Name');

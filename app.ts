@@ -175,3 +175,11 @@ const myself = {
 };
 console.log(myself.name);
 console.log(myself?.job?.title);
+
+const zero = 0;
+const knull = null;
+const myname = 'Ronchi';
+
+console.log(myname ?? 'No Name');
+console.log(knull ?? 'No Name');
+console.log(zero ?? 'No Name');
