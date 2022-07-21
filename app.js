@@ -83,3 +83,7 @@ const userInputElement2 = document.getElementById('user-input');
 if (userInputElement2) {
     userInputElement2.value = 'Hello World!';
 }
+const errorBags = {
+    email: 'Not a valid email',
+    password: 'Incorrect Password!',
+};
