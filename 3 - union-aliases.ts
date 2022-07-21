@@ -1,4 +1,4 @@
-type StringOrNumber = string | number;
+type StringOrNumber = string | number; //union type
 type ResultType = 'text' | 'number'; //literal type + union type
 function combine(
   input1: StringOrNumber,
