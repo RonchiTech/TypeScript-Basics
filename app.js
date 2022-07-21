@@ -1,32 +1,8 @@
 "use strict";
-const me = {
+let me;
+me = {
     name: 'Ronchi',
-    age: 24,
-    greet(message) {
-        console.log(`${message} ${this.name}`);
-    },
+    privileges: ['Update Server'],
+    startDate: new Date(),
 };
-me.greet('Happy Birthday');
-class Human {
-    constructor(name, friends) {
-        this.name = name;
-        this.author = 'You';
-        if (friends) {
-            this.friends = friends;
-        }
-    }
-    greet(message) {
-        console.log(`Message: ${message}, ${this.author}`);
-    }
-}
-const human = new Human('Ronchi');
-human.greet('Happy Birthday');
-console.log(human.name);
-let add;
-add = (n1, n2) => {
-    return n1 + n2;
-};
-let add2;
-add2 = (num1, num2) => {
-    return num1 + num2;
-};
+console.log(me);
