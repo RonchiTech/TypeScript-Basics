@@ -8,10 +8,12 @@ const me = {
 };
 me.greet('Happy Birthday');
 class Human {
-    constructor(name) {
+    constructor(name, friends) {
         this.name = name;
-        // name: string
         this.author = 'You';
+        if (friends) {
+            this.friends = friends;
+        }
     }
     greet(message) {
         console.log(`Message: ${message}, ${this.author}`);

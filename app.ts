@@ -17,15 +17,23 @@ me.greet('Happy Birthday');
 //Using Interface with Classes
 interface Name {
   readonly name: string;
+  optionalName?: string; //optional parameters and properties
+  friends?: string[];
 }
 interface Greetable extends Name {
   greet(message: string): void;
+  optionalGreet?(message: string): void;
 }
 
 class Human implements Greetable {
   // name: string
+  friends?: string[];
   author: string = 'You';
-  constructor(public name: string) {}
+  constructor(public name: string, friends?: string[]) {
+    if (friends) {
+      this.friends = friends;
+    }
+  }
 
   greet(message: string) {
     console.log(`Message: ${message}, ${this.author}`);
