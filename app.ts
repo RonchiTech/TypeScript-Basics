@@ -15,9 +15,10 @@ const me: Person = {
 me.greet('Happy Birthday');
 
 //Using Interface with Classes
-
-interface Greetable {
+interface Name {
   readonly name: string;
+}
+interface Greetable extends Name {
   greet(message: string): void;
 }
 
