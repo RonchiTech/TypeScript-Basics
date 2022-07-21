@@ -87,3 +87,14 @@ const errorBags = {
     email: 'Not a valid email',
     password: 'Incorrect Password!',
 };
+function combine(a, b) {
+    if (typeof a === 'string' || typeof b === 'string') {
+        //this is the type guard
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+const interger = combine(3.33, 2.612);
+interger.toFixed(2);
+const letter = combine('Hello', 'World!');
+letter.split('');

@@ -147,3 +147,20 @@ const errorBags: ErrorContainer = {
   email: 'Not a valid email',
   password: 'Incorrect Password!',
 };
+
+//6 Function Overloads
+function combine(q: string, b: string): string;
+function combine(x: number, y: number): number;
+function combine(a: Result, b: Result) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    //this is the type guard
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+const interger = combine(3.33, 2.612);
+interger.toFixed(2);
+
+const letter = combine('Hello', 'World!');
+letter.split('');
