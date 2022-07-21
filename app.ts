@@ -13,3 +13,24 @@ const me: Person = {
 };
 
 me.greet('Happy Birthday');
+
+//Using Interface with Classes
+
+interface Greetable {
+  readonly name: string;
+  greet(message: string): void;
+}
+
+class Human implements Greetable {
+  // name: string
+  author: string = 'You';
+  constructor(public name: string) {}
+
+  greet(message: string) {
+    console.log(`Message: ${message}, ${this.author}`);
+  }
+}
+
+const human = new Human('Ronchi');
+human.greet('Happy Birthday');
+console.log(human.name);
