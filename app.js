@@ -48,9 +48,27 @@ function useVehicle(vehicle) {
     //   vehicle.loadCargo(1500);
     // }
     //better way
-    if (vehicle instanceof Truck) { //instanceof
+    if (vehicle instanceof Truck) {
+        //instanceof
         vehicle.loadCargo(1500);
     }
 }
 useVehicle(v1);
 useVehicle(v2);
+function moveAnimal(animal) {
+    let speed;
+    switch (animal.type) {
+        case 'bird':
+            speed = animal.flyingSpeed;
+            break;
+        case 'horse':
+            speed = animal.runningSpeed;
+            break;
+        default:
+            speed = 'Not animal';
+    }
+    console.log('Moving at speed ' + speed);
+}
+let viceGanda;
+viceGanda = { runningSpeed: 100, type: 'horse' };
+moveAnimal(viceGanda);

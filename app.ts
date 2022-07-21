@@ -80,10 +80,44 @@ function useVehicle(vehicle: Vehicle) {
   // }
 
   //better way
-  if (vehicle instanceof Truck) { //instanceof
+  if (vehicle instanceof Truck) {
+    //instanceof
     vehicle.loadCargo(1500);
   }
 }
 
 useVehicle(v1);
 useVehicle(v2);
+
+//3. Discriminated Unions
+interface Bird {
+  //add a type
+  type: 'bird'; //literal type
+  flyingSpeed: number;
+}
+
+interface Horse {
+  //add a type
+  type: 'horse'; //literal type
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+      break;
+    default:
+      speed = 'Not animal';
+  }
+  console.log('Moving at speed ' + speed);
+}
+let viceGanda: Horse;
+viceGanda = { runningSpeed: 100, type: 'horse' };
+moveAnimal(viceGanda);
