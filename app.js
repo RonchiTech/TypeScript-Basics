@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 let me;
 me = {
     name: 'Ronchi',
@@ -98,3 +99,13 @@ const interger = combine(3.33, 2.612);
 interger.toFixed(2);
 const letter = combine('Hello', 'World!');
 letter.split('');
+//7. Optional Chaining
+const myself = {
+    name: 'Ronchi',
+    age: 24,
+    job: {
+        title: 'Full Stack Developer',
+    },
+};
+console.log(myself.name);
+console.log((_a = myself === null || myself === void 0 ? void 0 : myself.job) === null || _a === void 0 ? void 0 : _a.title);

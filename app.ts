@@ -164,3 +164,14 @@ interger.toFixed(2);
 
 const letter = combine('Hello', 'World!');
 letter.split('');
+
+//7. Optional Chaining
+const myself = {
+  name: 'Ronchi',
+  age: 24,
+  job: {
+    title: 'Full Stack Developer',
+  },
+};
+console.log(myself.name);
+console.log(myself?.job?.title);
