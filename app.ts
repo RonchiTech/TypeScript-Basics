@@ -33,3 +33,39 @@ const mergedObj2 = merger2({ name: 'Floyd' }, 24);
 console.log('M2', mergedObj2);
 
 mergedObj2.name;
+
+//4. Another Generic Function
+function countArrayLength<T extends string[]>(params: T) {
+  return params.length;
+}
+const sports = ['basketball', 'volleyball', 'football', 'badminton'];
+
+console.log(countArrayLength(sports));
+
+function countAndDescribe<T extends string[] | number[]>(element: T) {
+  let description = 'Got no element';
+  if (element.length === 1) {
+    description = 'Got 1 element';
+  } else if (element.length > 1) {
+    description = `Got ${element.length} elements`;
+  }
+  return [element, description];
+}
+
+console.log(countAndDescribe(sports));
+
+interface Lengthy {
+  length: number
+}
+
+function countAndDescribe2<T extends Lengthy>(element: T) {
+  let description = 'Got no element';
+  if (element.length === 1) {
+    description = 'Got 1 element';
+  } else if (element.length > 1) {
+    description = `Got ${element.length} elements`;
+  }
+  return [element, description];
+}
+
+console.log(countAndDescribe2('Hello World!'));
