@@ -55,7 +55,7 @@ function countAndDescribe<T extends string[] | number[]>(element: T) {
 console.log(countAndDescribe(sports));
 
 interface Lengthy {
-  length: number
+  length: number;
 }
 
 function countAndDescribe2<T extends Lengthy>(element: T) {
@@ -69,3 +69,12 @@ function countAndDescribe2<T extends Lengthy>(element: T) {
 }
 
 console.log(countAndDescribe2('Hello World!'));
+
+//5. The keyof constraint
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return 'Result: ' + obj[key];
+}
+extractAndConvert({ name: 'Floyd', age: 24 }, 'name');
