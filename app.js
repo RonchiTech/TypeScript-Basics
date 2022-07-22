@@ -57,3 +57,44 @@ function countAndDescribe2(element) {
     return [element, description];
 }
 console.log(countAndDescribe2('Hello World!'));
+//5. The keyof constraint
+function extractAndConvert(obj, key) {
+    return 'Result: ' + obj[key];
+}
+extractAndConvert({ name: 'Floyd', age: 24 }, 'name');
+//6. Generic Classes
+class DataStorage {
+    constructor() {
+        this.data = [];
+    }
+    addItem(item) {
+        this.data.push(item);
+    }
+    removeItem(item) {
+        if (this.data.indexOf(item) === -1) {
+            return 'Item Not Found';
+        }
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+    getItems() {
+        return [...this.data];
+    }
+}
+const textStorage = new DataStorage();
+textStorage.addItem('Ronchi');
+textStorage.addItem('Floyd');
+textStorage.addItem('Quijano');
+textStorage.addItem('Miong');
+console.log(textStorage.getItems());
+const numberStorage = new DataStorage();
+numberStorage.addItem(5);
+numberStorage.addItem(25);
+const anyStorage = new DataStorage();
+anyStorage.addItem('Hello');
+anyStorage.addItem(7);
+// const objStorage = new DataStorage<object>(); //dont allow object
+// objStorage.addItem({ name: 'RFM' });
+// objStorage.addItem({ name: 'NKW' });
+// //...Some calculation
+// objStorage.removeItem({ name: 'RFM' });
+// console.log(objStorage.getItems());
