@@ -92,9 +92,19 @@ numberStorage.addItem(25);
 const anyStorage = new DataStorage();
 anyStorage.addItem('Hello');
 anyStorage.addItem(7);
-// const objStorage = new DataStorage<object>(); //dont allow object
-// objStorage.addItem({ name: 'RFM' });
-// objStorage.addItem({ name: 'NKW' });
-// //...Some calculation
-// objStorage.removeItem({ name: 'RFM' });
-// console.log(objStorage.getItems());
+//Partial utility type
+function createCourseGoal(title, description, date) {
+    // return { title, description, completeUntil: date };//this will work but maybe you need to do something / other things
+    //example
+    let courseGoal = {};
+    //...validation
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+console.log(createCourseGoal('IT', 'Information Technology', new Date()));
+//Readonly utility type
+const myNames = ['Ronchi', 'Floyd'];
+// myNames.push('RFM'); //error
+// myNames.pop(); //error because its a readonly array

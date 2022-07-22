@@ -120,3 +120,30 @@ anyStorage.addItem(7);
 // //...Some calculation
 // objStorage.removeItem({ name: 'RFM' });
 // console.log(objStorage.getItems());
+
+//7. Generic Utility Types
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+//Partial utility type
+function createCourseGoal(title: string, description: string, date: Date) {
+  // return { title, description, completeUntil: date };//this will work but maybe you need to do something / other things
+  //example
+  let courseGoal: Partial<CourseGoal> = {};
+  //...validation
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+
+  return courseGoal as CourseGoal;
+}
+
+console.log(createCourseGoal('IT', 'Information Technology', new Date()));
+
+//Readonly utility type
+const myNames: Readonly<string[]> = ['Ronchi', 'Floyd'];
+// myNames.push('RFM'); //error
+// myNames.pop(); //error because its a readonly array
