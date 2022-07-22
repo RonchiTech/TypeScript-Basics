@@ -12,8 +12,9 @@ promise.then((result) => {
 });
 
 //2. Creating a Generic Function
-function merger<T, U>(obj1: T, obj2: U) {
-  return { ...obj1, ...obj2 };
+//& 3.with Constraints (<T extends object...>)
+function merger<T extends object, U extends object>(obj1: T, obj2: U) {
+  return Object.assign(obj1, obj2);
 }
 const mergedObj = merger({ name: 'Ronchi' }, { age: 24, male: true });
 mergedObj.age;
@@ -22,3 +23,13 @@ mergedObj.age;
 //   { name: string; hobbies: string[] },
 //   { age: number; male: boolean }
 // >({ name: 'Ronchi', hobbies: ['sleeping'] }, { age: 24, male: true });
+
+//3. Working with Constraints
+//restrict the types of T and U
+function merger2<T extends object, U extends number>(obj1: T, obj2: U) {
+  return Object.assign(obj1, obj2);
+}
+const mergedObj2 = merger2({ name: 'Floyd' }, 24);
+console.log('M2', mergedObj2);
+
+mergedObj2.name;
