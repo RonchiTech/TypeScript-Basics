@@ -81,6 +81,35 @@ function Log(target: any, propertyName: string | symbol) {
   console.log('target', target);
   console.log('propertyName', propertyName);
 }
+
+function Log2(
+  target: any,
+  name: string | symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log('Accessor Decorator');
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log3(
+  target: any,
+  name: string | symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log('Method Decorator');
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log4(target: any, name: string | symbol, position: number) {
+  console.log('Parameter Decorator');
+  console.log(target);
+  console.log(name);
+  console.log(position);
+}
 class Product {
   @Log
   title: string;
@@ -89,13 +118,15 @@ class Product {
     this.title = t;
     this._price = p;
   }
+  @Log2
   set price(value: number) {
     if (value === 0) {
       throw new Error('Invalid! Price must not be set to 0');
     }
     this._price = value;
   }
-  getPriceWithTax(tax: number) {
+  @Log3
+  getPriceWithTax(@Log4 tax: number) {
     return this._price * (1 + tax);
   }
 }
