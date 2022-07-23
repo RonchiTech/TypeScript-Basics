@@ -40,38 +40,44 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 // }
 // const person2 = new Person2();
 // // console.log(person2);
-//3. Building more useful decorator
-//4. Adding multiple decorator
-// function Logger3(logString: string) {
-//   //Decorator
-//   console.log('Logger Factory');
-//   return function (constructor: Function) {
-//     console.log(logString);
-//     console.log('constructor', constructor);
-//   };
-// }
-// function WithTemplate(template: string, hookId: string) {
-//   console.log('Template Factory');
-//   return function (constructor: any) {
-//     const element = document.getElementById(hookId);
-//     console.log('Logging Template...');
-//     if (element) {
-//       const per = new constructor()
-//       element.innerHTML = template;
-//       document.querySelector('h1')!.textContent = per.name;
-//     }
-//   };
-// }
-// @Logger3('Logging 3....')
-// @WithTemplate('<h1>Hello World!</h1>', 'app')
-// class Person3 {
-//   name = 'Ronchi';
-//   constructor() {
-//     console.log('Creating Person Object....');
-//   }
-// }
-// const person3 = new Person3();
-// console.log(person3);
+// 3. Building more useful decorator
+// 4. Adding multiple decorator
+function Logger3(logString) {
+    //Decorator
+    console.log('Logger Factory');
+    return function (constructor) {
+        console.log(logString);
+        console.log('constructor', constructor);
+    };
+}
+function WithTemplate(template, hookId) {
+    console.log('Template Factory');
+    return function (originalConstructor) {
+        return class extends originalConstructor {
+            constructor(...args) {
+                super();
+                const element = document.getElementById(hookId);
+                console.log('Logging Template...');
+                if (element) {
+                    element.innerHTML = template;
+                    document.querySelector('h1').textContent = this.name;
+                }
+            }
+        };
+    };
+}
+let Person3 = class Person3 {
+    constructor() {
+        this.name = 'Ronchi';
+        console.log('Creating Person Object....');
+    }
+};
+Person3 = __decorate([
+    Logger3('Logging 3....'),
+    WithTemplate('<h1>Hello World!</h1>', 'app')
+], Person3);
+const person3 = new Person3();
+console.log(person3);
 //5. Diving into Property Decorator
 function Log(target, propertyName) {
     console.log('Property Decorator');
