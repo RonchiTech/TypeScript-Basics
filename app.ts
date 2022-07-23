@@ -138,34 +138,109 @@
 // }
 
 //6. Other decorator return types, example: creating an autobind decorator
-function AutoBinder(
-  _: any,
-  _2: string | Symbol,
-  decorator: PropertyDescriptor
-) {
-  const originalMethod = decorator.value;
-  const newDescriptor: PropertyDescriptor = {
-    configurable: true,
-    enumerable: false,
-    get() {
-      console.log('This', this);
-      const boundFn = originalMethod.bind(this);
-      return boundFn;
-    },
+// function AutoBinder(
+//   _: any,
+//   _2: string | Symbol,
+//   decorator: PropertyDescriptor
+// ) {
+//   const originalMethod = decorator.value;
+//   const newDescriptor: PropertyDescriptor = {
+//     configurable: true,
+//     enumerable: false,
+//     get() {
+//       console.log('This', this);
+//       const boundFn = originalMethod.bind(this);
+//       return boundFn;
+//     },
+//   };
+//   return newDescriptor;
+// }
+// class Printer {
+//   message = 'This Works';
+//   @AutoBinder
+//   showMessage() {
+//     console.log(this.message);
+//   }
+// }
+// const p = new Printer();
+// const button = document.querySelector('button')!;
+
+// // button.addEventListener('click', p.showMessage.bind(p)); //One work around, by using bind. The other is by using a decorator
+
+// //Autobinded
+// button.addEventListener('click', p.showMessage)
+
+//7. Validation with Decorator
+interface ValidatorConfig {
+  [property: string]: {
+    [validatableProp: string]: string[]; //['required','positive']
   };
-  return newDescriptor;
 }
-class Printer {
-  message = 'This Works';
-  @AutoBinder
-  showMessage() {
-    console.log(this.message);
+const registeredValidators: ValidatorConfig = {};
+
+function Required(target: any, name: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [name]: [
+      ...(registeredValidators[target.constructor.name]?.[name] ?? []),
+      'required',
+    ],
+  };
+}
+
+function PositiveNumber(target: any, name: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [name]: [
+      ...(registeredValidators[target.constructor.name]?.[name] ?? []),
+      'required',
+    ],
+  };
+}
+
+function validate(obj: any) {
+  const objValidatorConfig = registeredValidators[obj.constructor.name];
+  if (!objValidatorConfig) {
+    return true;
+  }
+  let isValid = true;
+  for (const prop in objValidatorConfig) {
+    for (const validator of objValidatorConfig[prop]) {
+      switch (validator) {
+        case 'required':
+          isValid = isValid && !!obj[prop];
+          break;
+        case 'positive':
+          isValid = isValid && obj[prop] > 0;
+          break;
+      }
+    }
+  }
+  return isValid;
+}
+class Course {
+  @Required
+  title: string;
+  // @Required
+  @PositiveNumber
+  price: number;
+  constructor(t: string, p: number) {
+    this.title = t;
+    this.price = p;
   }
 }
-const p = new Printer();
-const button = document.querySelector('button')!;
 
-// button.addEventListener('click', p.showMessage.bind(p)); //One work around, by using bind. The other is by using a decorator
+const courseForm = document.querySelector('form')!;
+courseForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const titleElement = document.getElementById('title') as HTMLInputElement;
+  const priceElement = document.getElementById('price') as HTMLInputElement;
 
-//Autobinded
-button.addEventListener('click', p.showMessage)
+  const title = titleElement.value;
+  const price = Number(priceElement.value);
+  const newCourse = new Course(title, price);
+  if (!validate(newCourse)) {
+    alert('Invalid input, please try again!');
+  }
+  console.log(newCourse);
+});
