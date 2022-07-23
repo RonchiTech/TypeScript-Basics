@@ -22,3 +22,51 @@ Person = __decorate([
 ], Person);
 const person = new Person();
 console.log(person);
+//2. Decorator Factories
+function Logger2(logString) {
+    //Decorator
+    return function (constructor) {
+        console.log(logString);
+        console.log('constructor', constructor);
+    };
+}
+let Person2 = class Person2 {
+    constructor() {
+        this.name = 'Ronchi';
+        console.log('Creating Person Object....');
+    }
+};
+Person2 = __decorate([
+    Logger2('Logging decorator...')
+], Person2);
+const person2 = new Person2();
+console.log(person2);
+//3. Building more useful decorator
+// function Logger3(logString: string) {
+//   //Decorator
+//   return function (constructor: Function) {
+//     console.log(logString);
+//     console.log('constructor', constructor);
+//   };
+// }
+function WithTemplate(template, hookId) {
+    return function (constructor) {
+        const element = document.getElementById(hookId);
+        if (element) {
+            const per = new constructor();
+            element.innerHTML = template;
+            document.querySelector('h1').textContent = per.name;
+        }
+    };
+}
+let Person3 = class Person3 {
+    constructor() {
+        this.name = 'Ronchi';
+        console.log('Creating Person Object....');
+    }
+};
+Person3 = __decorate([
+    WithTemplate('<h1>Hello World!</h1>', 'app')
+], Person3);
+const person3 = new Person2();
+console.log(person3);
