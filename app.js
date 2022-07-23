@@ -18,9 +18,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 // const person = new Person();
 // console.log(person);
 // //2. Decorator Factories
@@ -42,88 +39,121 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 // // console.log(person2);
 // 3. Building more useful decorator
 // 4. Adding multiple decorator
-function Logger3(logString) {
-    //Decorator
-    console.log('Logger Factory');
-    return function (constructor) {
-        console.log(logString);
-        console.log('constructor', constructor);
+// function Logger3(logString: string) {
+//   //Decorator
+//   console.log('Logger Factory');
+//   return function (constructor: Function) {
+//     console.log(logString);
+//     console.log('constructor', constructor);
+//   };
+// }
+// function WithTemplate(template: string, hookId: string) {
+//   console.log('Template Factory');
+//   return function <T extends { new (...args: any[]): { name: string } }>(
+//     originalConstructor: T
+//   ) {
+//     return class extends originalConstructor {
+//       constructor(...args: any[]) {
+//         super();
+//         const element = document.getElementById(hookId);
+//         console.log('Logging Template...');
+//         if (element) {
+//           element.innerHTML = template;
+//           document.querySelector('h1')!.textContent = this.name;
+//         }
+//       }
+//     };
+//   };
+// }
+// @Logger3('Logging 3....')
+// @WithTemplate('<h1>Hello World!</h1>', 'app')
+// class Person3 {
+//   name = 'Ronchi';
+//   constructor() {
+//     console.log('Creating Person Object....');
+//   }
+// }
+// const person3 = new Person3();
+// console.log(person3);
+// //5. Diving into Property Decorator
+// function Log(target: any, propertyName: string | symbol) {
+//   console.log('Property Decorator');
+//   console.log('target', target);
+//   console.log('propertyName', propertyName);
+// }
+// function Log2(
+//   target: any,
+//   name: string | symbol,
+//   descriptor: PropertyDescriptor
+// ) {
+//   console.log('Accessor Decorator');
+//   console.log(target);
+//   console.log(name);
+//   console.log(descriptor);
+// }
+// function Log3(
+//   target: any,
+//   name: string | symbol,
+//   descriptor: PropertyDescriptor
+// ) {
+//   console.log('Method Decorator');
+//   console.log(target);
+//   console.log(name);
+//   console.log(descriptor);
+// }
+// function Log4(target: any, name: string | symbol, position: number) {
+//   console.log('Parameter Decorator');
+//   console.log(target);
+//   console.log(name);
+//   console.log(position);
+// }
+// class Product {
+//   @Log
+//   title: string;
+//   private _price: number;
+//   constructor(t: string, p: number) {
+//     this.title = t;
+//     this._price = p;
+//   }
+//   @Log2
+//   set price(value: number) {
+//     if (value === 0) {
+//       throw new Error('Invalid! Price must not be set to 0');
+//     }
+//     this._price = value;
+//   }
+//   @Log3
+//   getPriceWithTax(@Log4 tax: number) {
+//     return this._price * (1 + tax);
+//   }
+// }
+//6. Other decorator return types, example: creating an autobind decorator
+function AutoBinder(_, _2, decorator) {
+    const originalMethod = decorator.value;
+    const newDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            console.log('This', this);
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        },
     };
+    return newDescriptor;
 }
-function WithTemplate(template, hookId) {
-    console.log('Template Factory');
-    return function (originalConstructor) {
-        return class extends originalConstructor {
-            constructor(...args) {
-                super();
-                const element = document.getElementById(hookId);
-                console.log('Logging Template...');
-                if (element) {
-                    element.innerHTML = template;
-                    document.querySelector('h1').textContent = this.name;
-                }
-            }
-        };
-    };
-}
-let Person3 = class Person3 {
+class Printer {
     constructor() {
-        this.name = 'Ronchi';
-        console.log('Creating Person Object....');
+        this.message = 'This Works';
     }
-};
-Person3 = __decorate([
-    Logger3('Logging 3....'),
-    WithTemplate('<h1>Hello World!</h1>', 'app')
-], Person3);
-const person3 = new Person3();
-console.log(person3);
-//5. Diving into Property Decorator
-function Log(target, propertyName) {
-    console.log('Property Decorator');
-    console.log('target', target);
-    console.log('propertyName', propertyName);
-}
-function Log2(target, name, descriptor) {
-    console.log('Accessor Decorator');
-    console.log(target);
-    console.log(name);
-    console.log(descriptor);
-}
-function Log3(target, name, descriptor) {
-    console.log('Method Decorator');
-    console.log(target);
-    console.log(name);
-    console.log(descriptor);
-}
-function Log4(target, name, position) {
-    console.log('Parameter Decorator');
-    console.log(target);
-    console.log(name);
-    console.log(position);
-}
-class Product {
-    constructor(t, p) {
-        this.title = t;
-        this._price = p;
-    }
-    set price(value) {
-        if (value === 0) {
-            throw new Error('Invalid! Price must not be set to 0');
-        }
-        this._price = value;
-    }
-    getPriceWithTax(tax) {
-        return this._price * (1 + tax);
+    showMessage() {
+        console.log(this.message);
     }
 }
 __decorate([
-    Log
-], Product.prototype, "title", void 0);
-__decorate([
-    Log2
-], Product.prototype, "price", null);
-__decorate([
-    Log3,
-    __param(0, Log4)
-], Product.prototype, "getPriceWithTax", null);
+    AutoBinder
+], Printer.prototype, "showMessage", null);
+const p = new Printer();
+const button = document.querySelector('button');
+// button.addEventListener('click', p.showMessage.bind(p)); //One work around, by using bind. The other is by using a decorator
+//Autobinded
+button.addEventListener('click', p.showMessage);
