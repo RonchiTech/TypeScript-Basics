@@ -1,3 +1,27 @@
+function AutoBinder(
+  target: any,
+  methodName: string | symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log(target);
+  console.log(methodName);
+  console.log(descriptor);
+
+  const originalMethod = descriptor.value;
+  // console.log(originalMethod);
+
+  const newDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      // console.log('This', this);
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    },
+  };
+  return newDescriptor;
+}
+
 class ProjectInput {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
@@ -28,14 +52,17 @@ class ProjectInput {
     this.configure();
     this.attach();
   }
+  
+  @AutoBinder
   private submitHandler(event: Event) {
-    console.log(event);
-    
+    // console.log(event);
     event.preventDefault();
     console.log('Logging...', this.titleInputElement.value);
   }
+
   private configure() {
-    this.formElement.addEventListener('submit', this.submitHandler.bind(this));
+    // this.formElement.addEventListener('submit', this.submitHandler.bind(this));
+    this.formElement.addEventListener('submit', this.submitHandler);
   }
 
   private attach() {

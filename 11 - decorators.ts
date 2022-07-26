@@ -139,8 +139,8 @@
 
 //6. Other decorator return types, example: creating an autobind decorator
 // function AutoBinder(
-//   _: any,
-//   _2: string | Symbol,
+//   _: any, //target
+//   _2: string | Symbol, //name
 //   decorator: PropertyDescriptor
 // ) {
 //   const originalMethod = decorator.value;
