@@ -1,3 +1,5 @@
+type TupleOrVoid = [string, string, number] | void;
+
 function AutoBinder(
   target: any,
   methodName: string | symbol,
@@ -52,12 +54,48 @@ class ProjectInput {
     this.configure();
     this.attach();
   }
-  
+
+  private validateUserInput(): TupleOrVoid {
+    const enteredTitle = this.titleInputElement.value;
+    const enteredDescription = this.descriptionInputElement.value;
+    const enteredPeople = +this.peopleInputElement.value;
+
+    //Could improve the validation, make it more scalable
+    if (
+      enteredTitle.trim().length === 0 ||
+      enteredDescription.trim().length === 0 ||
+      enteredPeople === 0
+    ) {
+      alert('Invalid input, please try again later!');
+      return;
+    }
+
+    return [
+      this.titleInputElement.value,
+      this.descriptionInputElement.value,
+      +this.peopleInputElement.value,
+    ];
+  }
+
   @AutoBinder
   private submitHandler(event: Event) {
     // console.log(event);
     event.preventDefault();
-    console.log('Logging...', this.titleInputElement.value);
+    const userInput = this.validateUserInput();
+    
+    if (Array.isArray(userInput)) {
+      const [title, description, people] = userInput;
+      console.log(title, description, people);
+    } else {
+      console.log('Invalid Input!');
+    }
+    this.clearInput();
+  }
+
+  private clearInput() {
+    this.titleInputElement.value = '';
+    this.descriptionInputElement.value = '';
+    this.peopleInputElement.value = '';
   }
 
   private configure() {

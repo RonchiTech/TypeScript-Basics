@@ -35,10 +35,40 @@ class ProjectInput {
         this.configure();
         this.attach();
     }
+    validateUserInput() {
+        const enteredTitle = this.titleInputElement.value;
+        const enteredDescription = this.descriptionInputElement.value;
+        const enteredPeople = +this.peopleInputElement.value;
+        //Could improve the validation, make it more scalable
+        if (enteredTitle.trim().length === 0 ||
+            enteredDescription.trim().length === 0 ||
+            enteredPeople === 0) {
+            alert('Invalid input, please try again later!');
+            return;
+        }
+        return [
+            this.titleInputElement.value,
+            this.descriptionInputElement.value,
+            +this.peopleInputElement.value,
+        ];
+    }
     submitHandler(event) {
         // console.log(event);
         event.preventDefault();
-        console.log('Logging...', this.titleInputElement.value);
+        const userInput = this.validateUserInput();
+        if (Array.isArray(userInput)) {
+            const [title, description, people] = userInput;
+            console.log(title, description, people);
+        }
+        else {
+            console.log('Invalid Input!');
+        }
+        this.clearInput();
+    }
+    clearInput() {
+        this.titleInputElement.value = '';
+        this.descriptionInputElement.value = '';
+        this.peopleInputElement.value = '';
     }
     configure() {
         // this.formElement.addEventListener('submit', this.submitHandler.bind(this));
