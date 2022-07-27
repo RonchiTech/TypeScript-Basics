@@ -117,13 +117,25 @@ class ProjectItem extends Component {
     get persons() {
         return `${this.project.people === 1 ? ' 1 person' : `${this.project.people} persons`} `;
     }
-    configure() { }
+    dragStartHandler(event) {
+        console.log(event);
+    }
+    dragEndHandler(event) {
+        console.log('Drag End', event);
+    }
+    configure() {
+        this.element.addEventListener('dragstart', this.dragStartHandler);
+        this.element.addEventListener('dragend', this.dragEndHandler);
+    }
     renderContent() {
         this.element.querySelector('h2').textContent = this.project.title;
         this.element.querySelector('h3').textContent = this.persons + ' assigned';
         this.element.querySelector('p').textContent = this.project.description;
     }
 }
+__decorate([
+    AutoBinder
+], ProjectItem.prototype, "dragStartHandler", null);
 //ProjectList Class
 class ProjectList extends Component {
     constructor(type) {
