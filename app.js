@@ -145,7 +145,19 @@ class ProjectList extends Component {
         this.configure();
         this.renderContent();
     }
+    dragOverHandler(event) {
+        const listElement = this.element.querySelector('ul');
+        listElement.classList.add('droppable');
+    }
+    dropHandler(event) { }
+    dragLeaveHandler(event) {
+        const listElement = this.element.querySelector('ul');
+        listElement.classList.remove('droppable');
+    }
     configure() {
+        this.element.addEventListener('dragover', this.dragOverHandler);
+        this.element.addEventListener('dragleave', this.dragLeaveHandler);
+        this.element.addEventListener('drop', this.dropHandler);
         projectState.addListener((projects) => {
             console.log('projects...', projects);
             const relevantProjects = projects.filter((prj) => {
@@ -172,6 +184,12 @@ class ProjectList extends Component {
         }
     }
 }
+__decorate([
+    AutoBinder
+], ProjectList.prototype, "dragOverHandler", null);
+__decorate([
+    AutoBinder
+], ProjectList.prototype, "dragLeaveHandler", null);
 //ProjectInput Class
 class ProjectInput extends Component {
     constructor() {

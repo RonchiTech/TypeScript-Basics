@@ -183,17 +183,15 @@ class ProjectItem
   @AutoBinder
   dragStartHandler(event: DragEvent): void {
     console.log(event);
-    
   }
 
   dragEndHandler(event: DragEvent): void {
     console.log('Drag End', event);
-    
   }
 
   configure(): void {
     this.element.addEventListener('dragstart', this.dragStartHandler);
-    this.element.addEventListener('dragend', this.dragEndHandler)
+    this.element.addEventListener('dragend', this.dragEndHandler);
   }
 
   renderContent(): void {
@@ -205,7 +203,10 @@ class ProjectItem
 }
 
 //ProjectList Class
-class ProjectList extends Component<HTMLDivElement, HTMLElement> {
+class ProjectList
+  extends Component<HTMLDivElement, HTMLElement>
+  implements Droppable
+{
   assignedProjects: Project[];
 
   constructor(private type: 'active' | 'finished') {
@@ -216,7 +217,25 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
     this.renderContent();
   }
 
+  @AutoBinder
+  dragOverHandler(event: DragEvent): void {
+    const listElement = this.element.querySelector('ul')!;
+    listElement.classList.add('droppable');
+  }
+
+  dropHandler(event: DragEvent): void {}
+
+  @AutoBinder
+  dragLeaveHandler(event: DragEvent): void {
+     const listElement = this.element.querySelector('ul')!;
+     listElement.classList.remove('droppable');
+  }
+
   configure(): void {
+    this.element.addEventListener('dragover', this.dragOverHandler);
+    this.element.addEventListener('dragleave', this.dragLeaveHandler);
+    this.element.addEventListener('drop', this.dropHandler);
+
     projectState.addListener((projects: Project[]) => {
       console.log('projects...', projects);
       const relevantProjects = projects.filter((prj) => {
@@ -229,6 +248,7 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> {
       this.renderProjects();
     });
   }
+
   renderContent() {
     const listId = `${this.type}-project-list`;
     this.element.querySelector('ul')!.id = listId;
