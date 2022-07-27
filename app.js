@@ -24,6 +24,12 @@ function validate(input) {
     }
     return isValid;
 }
+// type Status = 'active' | 'finished';
+var ProjectStatus;
+(function (ProjectStatus) {
+    ProjectStatus[ProjectStatus["Active"] = 0] = "Active";
+    ProjectStatus[ProjectStatus["Finished"] = 1] = "Finished";
+})(ProjectStatus || (ProjectStatus = {}));
 //Autobinding
 function AutoBinder(target, methodName, descriptor) {
     console.log(target);
@@ -41,6 +47,16 @@ function AutoBinder(target, methodName, descriptor) {
         },
     };
     return newDescriptor;
+}
+//Project Class
+class Project {
+    constructor(id, title, description, people, status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.people = people;
+        this.status = status;
+    }
 }
 //ProjectState Class
 class ProjectState {
@@ -61,12 +77,7 @@ class ProjectState {
         this.listeners.push(listerFunction);
     }
     addProjects(title, description, people) {
-        const newProject = {
-            id: `${Math.random()}-${new Date().getMilliseconds()}`,
-            title: title,
-            description: description,
-            people: people,
-        };
+        const newProject = new Project(`${Math.random()}-${new Date().getMilliseconds()}`, title, description, people, ProjectStatus.Active);
         this.projects.push(newProject);
         for (const listenerFunction of this.listeners) {
             listenerFunction(this.projects.slice());
