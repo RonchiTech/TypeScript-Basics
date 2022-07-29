@@ -1,11 +1,11 @@
 // / <reference path="base-component.ts" />
-import { Component } from './base-component.js';
-import { ProjectItem } from './project-item.js';
-import { Droppable } from '../interfaces/drag-and-drop.js';
-import { Project } from '../models/project.js';
-import { AutoBinder } from '../decorators/autobind.js';
-import { projectState } from '../state/project.js';
-import { ProjectStatus } from '../models/project.js';
+import { Component } from './base-component';
+import { ProjectItem } from './project-item';
+import { Droppable } from '../interfaces/drag-and-drop';
+import { Project } from '../models/project';
+import { AutoBinder } from '../decorators/autobind';
+import { projectState } from '../state/project';
+import { ProjectStatus } from '../models/project';
 //ProjectList Class
 export class ProjectList
   extends Component<HTMLDivElement, HTMLElement>

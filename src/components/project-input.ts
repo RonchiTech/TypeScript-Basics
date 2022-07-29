@@ -1,10 +1,10 @@
 
 // / <reference path="base-component.ts" />
-import { Component } from './base-component.js';
+import { Component } from './base-component';
 import { TupleOrVoid } from './../types/tuple-void';
-import { Validatable, validate } from '../utils/validation.js';
-import { AutoBinder } from '../decorators/autobind.js';
-import { projectState } from '../state/project.js';
+import { Validatable, validate } from '../utils/validation';
+import { AutoBinder } from '../decorators/autobind';
+import { projectState } from '../state/project';
 //ProjectInput Class
 export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
   titleInputElement: HTMLInputElement;
